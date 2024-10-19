@@ -35,4 +35,22 @@ fs.readFile("input.json", (err, data) => {
   const k = keys.k;
 
   const points = [];
+
+  for (let i = 1; i <= n; i++) {
+    const entry = jsonData[i];
+    if (entry) {
+      const base = parseInt(entry.base);
+      const value = entry.value;
+      const decodedY = decode(value, base);
+      points.push([i, decodedY]);
+      console.log(` x = ${i} and y = ${decodedY}`);
+    }
+  }
+
+  if (points.length >= k) {
+    const secret = findY(points);
+    console.log("c = ", secret.toString());
+  } else {
+    console.log("Nhi Mila");
+  }
 });
